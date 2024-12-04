@@ -69,6 +69,57 @@
     font-weight: bold; /* Bold text */
     font-size: 1.2em; /* Slightly larger text */
 }
+
+
+/* Default (Desktop) Styles */
+body {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.item {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin: 10px;
+    flex: 1;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+}
+
+/* For screens less than 600px (Mobile Devices) */
+@media (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        flex-direction: column; /* Stack items vertically on small screens */
+        padding: 10px;
+    }
+
+    .item {
+        width: 100%; /* Make each item full-width */
+        margin-bottom: 10px;
+    }
+
+    img {
+        margin: 10px 0; /* Reduce margin for images on mobile */
+    }
+}
+
+
     </style>
 </head>
 <body>
