@@ -1,186 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sahil's Knowledge Hub</title>
-  <style>
-    /* General Styles */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #f7f7f7, #dfe9f3);
-      color: #333;
-      animation: fadeIn 2s ease-in-out;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahil's Professional Website</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Font Awesome link -->
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-    .main-container {
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      animation: slideUp 1.5s ease-out;
-    }
+        /* Header Section */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            font-size: 2rem;
+            margin: 0;
+            font-weight: 700;
+        }
 
-    h1, h2 {
-      text-align: center;
-      color: #444;
-      animation: fadeInText 2s ease-out;
-    }
+        /* Content Section */
+        .content {
+            text-align: center;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+        }
+        .content h2 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .content p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
 
-    /* Introduction Section */
-    .introduction {
-      text-align: center;
-      margin-bottom: 30px;
-      animation: fadeIn 2s ease-out;
-    }
+        /* Button Style */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1rem;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #128c7e;
+            transform: scale(1.05);
+        }
 
-    .introduction p {
-      font-size: 18px;
-      line-height: 1.8;
-      color: #555;
-      opacity: 0;
-      animation: fadeInText 2s ease-out 0.5s forwards;
-    }
+        /* Footer Section */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: white;
+            font-size: 0.9rem;
+        }
 
-    /* Q&A Section */
-    .qa-section {
-      margin-top: 20px;
-      animation: fadeInText 2s ease-out 0.5s forwards;
-    }
+        /* Social Media Icons */
+        .social-icons {
+            margin-top: 5px;
+        }
+        .social-icons a {
+            margin: 0 10px;
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #3498db;
+        }
 
-    .qa-section h2 {
-      margin-bottom: 20px;
-    }
-
-    .qa {
-      margin-bottom: 30px;
-      padding: 20px;
-      background: #f9f9f9;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      opacity: 0;
-      animation: fadeInAnswer 1.5s ease-out forwards;
-    }
-
-    .qa h3 {
-      margin: 0 0 10px 0;
-      color: #333;
-      animation: slideInText 1s ease-in-out;
-    }
-
-    .qa p {
-      margin: 0;
-      line-height: 1.8;
-      color: #666;
-      text-align: justify;
-    }
-
-    /* Animation Effects */
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    @keyframes fadeInText {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    @keyframes slideUp {
-      0% { transform: translateY(50px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes slideInText {
-      0% { transform: translateX(-30px); opacity: 0; }
-      100% { transform: translateX(0); opacity: 1; }
-    }
-
-    @keyframes fadeInAnswer {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    /* Hover Effects */
-    .qa:hover {
-      background-color: #f1f1f1;
-      transform: translateY(-5px);
-      transition: all 0.3s ease;
-    }
-
-  </style>
+        /* Bold All Rights Reserved Text */
+        footer p strong {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <div class="main-container">
-    <!-- Introduction Section -->
-    <section class="introduction">
-      <h1>Welcome to Sahil's Knowledge Hub</h1>
-      <p>Hello! My name is <strong>Sahil</strong>. I am a graphic designer, web developer, and AI artist passionate about sharing knowledge and creative work. Explore my site to learn and grow!</p>
-    </section>
 
-    <!-- Questions and Answers Section -->
-    <section class="qa-section">
-      <h2>Questions and Answers</h2>
+<header>
+    <h1>Sahil's Dev & Design Atelier</h1>
+</header>
 
-      <!-- Question 1 -->
-      <div class="qa">
-        <h3>1. What is the importance of literary sources?</h3>
-        <p>
-          Literary sources play a crucial role in the study of history, culture, and civilization. These sources, which include texts, manuscripts, and written records, offer insights into the thoughts, beliefs, and practices of ancient societies. For example, the Vedic literature of ancient India, such as the Rigveda, reveals information about the spiritual, social, and political life of the time. Similarly, Greek, Roman, and Egyptian texts help us understand the philosophies, governance, and daily life of these civilizations. Literary sources also provide the foundation for the reconstruction of historical events, offering explanations for the rise and fall of empires, wars, and societal changes. Without these sources, much of the world’s early history would remain a mystery.
-        </p>
-      </div>
+<div class="content">
+    <h2>About Me</h2>
+    <p>I'm a Graphic Designer, Web Developer, Video Editor, and AI Artist offering services like logo design, video editing, and photo retouching, focused on high-quality, creative solutions.</p>
+    
+    <h3>Why Join My WhatsApp Group?</h3>
+    <p>This group is created for information and discussion. You'll find valuable insights on all topics here. Join to stay updated and learn from others.</p>
 
-      <!-- Question 2 -->
-      <div class="qa">
-        <h3>2. Describe Harappan town planning.</h3>
-        <p>
-          The Harappan civilization is famous for its highly organized and systematic town planning. Cities like Mohenjo-daro and Harappa were carefully designed with a grid-like pattern of streets, demonstrating advanced urban planning for their time. The streets were wide and intersected at right angles, allowing for easy movement within the city. One of the most remarkable features of Harappan town planning was the sophisticated drainage system. The cities had covered drains that were made from baked bricks, and the streets were sloped to ensure proper water drainage, preventing flooding. Additionally, houses were made of standardized baked bricks, which were uniform in size, showing a level of industrialization and standardization. In these cities, there were also large public structures, such as granaries, baths, and citadels, indicating an organized administration. The Great Bath of Mohenjo-daro, for instance, is considered an early example of public water management. This indicates that the Harappans valued cleanliness, public health, and efficient resource management.
-        </p>
-      </div>
+    <a href="https://chat.whatsapp.com/BTpOdzsygvSA0Ya0wF2hg3" class="btn" target="_blank">Join My WhatsApp Group</a>
+</div>
 
-      <!-- Question 3 -->
-      <div class="qa">
-        <h3>3. Reasons for the decline of the Harappan Civilization.</h3>
-        <p>
-          The decline of the Harappan civilization is a subject of considerable debate among historians and archaeologists. Multiple factors may have contributed to the fall of this once-prosperous civilization. One of the most widely accepted theories points to environmental factors, particularly changes in climate and river systems. It is believed that the Saraswati River, which was once a major water source for the Harappans, started to dry up due to tectonic shifts and climatic changes. This would have significantly impacted agriculture, a vital aspect of the civilization’s economy. Additionally, the shifting course of the Indus River might have led to flooding in certain areas, further disrupting the settlements. Another theory suggests that the decline could have been due to external invasions by Indo-Aryans or other tribes, although there is limited evidence to support this. Internal factors such as political instability, the breakdown of trade networks, and social unrest may have also played a role. Ultimately, it was likely a combination of these factors that led to the gradual decline and eventual abandonment of Harappan cities.
-        </p>
-      </div>
+<footer>
+    <p><strong>&copy; 2024 Sahil. All rights reserved.</strong></p>
+    
+    <div class="social-icons">
+ <a href="https://wa.me/8100017431" target="_blank"><i class="fab fa-whatsapp"></i></a> <!-- WhatsApp Icon -->
+       <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+      
+        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+       
+       
+    </div>
+</footer>
 
-      <!-- Question 4 -->
-      <div class="qa">
-        <h3>4. Describe the Aryan Debate.</h3>
-        <p>
-          The Aryan Debate revolves around the question of the origins and migration of the Aryans to the Indian subcontinent. There are two main theories: the Aryan Migration Theory (AMT) and the Indigenous Aryan Theory (IAT). The Aryan Migration Theory, which is the more widely accepted view among scholars, suggests that the Aryans were a group of Indo-European speakers who migrated from Central Asia to the Indian subcontinent around 1500 BCE. They brought with them the Vedic culture and language, which later influenced the development of Hinduism, the caste system, and the Sanskrit language. According to this theory, the Aryans displaced or assimilated with the indigenous populations of the region, including the Dravidians. On the other hand, the Indigenous Aryan Theory argues that the Aryans were not migrants but were already present in India from ancient times. Proponents of this theory suggest that the Vedic culture evolved locally, without external influences. The debate has significant implications for the understanding of ancient Indian history and identity. While the AMT is supported by linguistic evidence and archaeological findings, the IAT is popular among some Indian nationalists who view the Aryans as indigenous to the region.
-        </p>
-      </div>
-
-      <!-- Question 5 -->
-      <div class="qa">
-        <h3>5. How far is Ashoka responsible for the decline of the Mauryan Empire?</h3>
-
-          <p>
-          Ashoka, one of the greatest emperors of ancient India, is often credited with spreading Buddhism across India and other parts of Asia. However, his reign and the policies he adopted may also have contributed to the decline of the Mauryan Empire. After his conversion to Buddhism following the Kalinga War, Ashoka became a proponent of non-violence and renounced warfare. While this was beneficial for the cultural and moral landscape of India, it may have led to the weakening of military power and the inability to defend the empire against external threats.
-          Additionally, Ashoka's focus on spreading religious teachings and welfare policies might have shifted resources away from maintaining the empire's administration and military. After his death, the empire faced instability due to weak successors and the vast size of the empire, which made it difficult to govern effectively. As a result, the Mauryan Empire eventually fragmented and declined, although Ashoka’s contributions to Indian history and culture remain significant.
-        </p>
-      </div>
-    </section>
-  </div>
-
-  <script>
-    // JavaScript for additional interactions can be added here, such as interactive elements or event listeners.
-    // Example: Adding smooth scrolling to sections
-    document.querySelectorAll('a').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-  </script>
 </body>
 </html>
