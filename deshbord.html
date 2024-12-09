@@ -3,180 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js"></script>
-
-    <!-- Font Awesome for eye icon and social media icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <!-- CSS Styles -->
+    <title>Enter Your Details</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-        }
-
-        .login-container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 300px;
-            box-sizing: border-box;
-        }
-
-        h2 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .introduction {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        #error-message {
-            color: red;
-            margin-top: 10px;
-        }
-
-        .input-container {
-            position: relative;
-        }
-
-        .eye-icon {
-            cursor: pointer;
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .social-icons {
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 20px;
-            color: #333;
-        }
-
-        .social-icons a:hover {
-            color: #4CAF50;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #f0f4f8; color: #333; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; }
+        .container { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); width: 100%; max-width: 400px; }
+        h1 { font-size: 24px; margin-bottom: 20px; color: #333; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; font-size: 16px; }
+        button { width: 100%; padding: 12px; background-color: #007BFF; color: white; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
+        button:hover { background-color: #0056b3; }
+        #message { margin-top: 20px; font-size: 18px; color: #333; }
+        strong { color: #007BFF; }
     </style>
 </head>
 <body>
-
-    <div class="login-container">
-        <h2>Login</h2>
-        <p class="introduction">Welcome to the login page! Please enter your credentials below to access your account. If you don't have an account, you can register on the sign-up page.</p>
-        
-        <form id="loginForm">
-            <input type="email" id="email" placeholder="Email" required />
-            <div class="input-container">
-                <input type="password" id="password" placeholder="Password" required />
-                <span class="eye-icon" id="togglePassword"><i class="fas fa-eye"></i></span>
-            </div>
-            <button type="submit" id="loginButton">Login</button>
-            <p id="error-message"></p>
+    <div class="container">
+        <h1>Enter Your Name and System ID</h1>
+        <form id="idForm">
+            <!-- Input fields for Name and System ID -->
+            <input type="text" id="name" placeholder="Enter Your Name" required />
+            <input type="text" id="enteredID" placeholder="Enter Your System ID" required />
+            <button type="submit">Submit</button>
         </form>
-
-        <div class="social-icons">
-            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-        </div>
+        
+        <p id="message"></p>
     </div>
 
-    <!-- Firebase Configuration -->
     <script>
-        // Your Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyC90KPVSyYOvzjeURMSKkUv98HPKDbXeHo",
-            authDomain: "sr-login-cef1c.firebaseapp.com",
-            projectId: "sr-login-cef1c",
-            storageBucket: "sr-login-cef1c.appspot.com",
-            messagingSenderId: "998421619255",
-            appId: "1:998421619255:web:b6c12b8f4c505c8ff0521f"
-        };
-
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-
-        // Password visibility toggle
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordField = document.getElementById('password');
-        
-        togglePassword.addEventListener('click', function() {
-            // Toggle password visibility
-            const type = passwordField.type === 'password' ? 'text' : 'password';
-            passwordField.type = type;
-            this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>'; // Change icon based on visibility
-        });
-
-        // Handle form submission
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
+        document.getElementById('idForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            // Get the entered Name and System ID
+            const enteredName = document.getElementById('name').value;
+            const enteredID = document.getElementById('enteredID').value;
+            const savedID = localStorage.getItem('systemID');
 
-            // Firebase Authentication login
-            auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Login successful
-                    alert("Login successful");
-                    window.location.href = "sr.html";  // Redirect to another page after login
-                })
-                .catch((error) => {
-                    // Login failed
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    // Display custom error message
-                    if (errorCode === 'auth/wrong-password' || errorCode === 'auth/user-not-found') {
-                        document.getElementById('error-message').textContent = "Invalid email or password.";
-                    } else {
-                        document.getElementById('error-message').textContent = errorMessage;
-                    }
-                });
+            // Check if the entered ID matches the saved ID
+            if (enteredID == savedID) {
+                // Show confirmation message
+                document.getElementById('message').innerHTML = `Hello, ${enteredName}!<br>Your System ID is valid. You will be redirected shortly.`;
+                
+                // Redirect after 3 seconds
+                setTimeout(function() {
+                    window.location.href = "pkd.html"; // Replace with the actual page URL
+                }, 3000); // 3 seconds
+            } else {
+                document.getElementById('message').innerHTML = 'Invalid System ID. Please try again.';
+            }
         });
     </script>
-
 </body>
 </html>
