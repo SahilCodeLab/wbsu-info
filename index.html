@@ -7,7 +7,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js"></script>
     <style>
-        /* Reset margin and padding for all elements */
         * {
             margin: 0;
             padding: 0;
@@ -59,6 +58,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-top: 10px;
         }
 
         button:hover {
@@ -71,8 +71,13 @@
             color: #333;
         }
 
-        strong {
-            color: #007BFF;
+        small {
+            color: gray;
+            font-size: 14px;
+        }
+
+        #copyBtn, #nextPageBtn {
+            display: none;
         }
     </style>
 </head>
@@ -86,6 +91,8 @@
         </form>
         
         <p id="message"></p>
+        <button id="copyBtn">Copy System ID</button>
+        <button id="nextPageBtn">Go to Next Page</button>
     </div>
 
     <script type="module">
@@ -110,41 +117,74 @@
 
         let systemID;
 
-        // Step 1: Check if system ID is already in LocalStorage
+        // Check if system ID is already in LocalStorage
         systemID = localStorage.getItem('systemID');
 
-        // If system ID is found in LocalStorage, do not display anything yet
-        if (!systemID) {
+        if (systemID) {
+            document.getElementById('message').innerHTML = `
+                Your System ID is: <strong id="systemIdText">${systemID}</strong> <br>
+                <small>
+                    Note: This ID is valid as long as browser data is not cleared. If the browser data is cleared, you can generate a new ID. 
+                    Please copy and save this ID to access the website in the future.
+                </small>
+            `;
+            document.getElementById('copyBtn').style.display = 'block';
+        } else {
             document.getElementById('message').innerHTML = 'Please enter your details to generate your System ID.';
         }
 
-        // Step 2: Handle form submission
+        // Handle form submission
         document.getElementById('userForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            // Get user details
             const fullName = document.getElementById('fullName').value;
             const email = document.getElementById('email').value;
 
             if (fullName && email) {
-                // Step 3: Generate a unique system ID
-                systemID = Math.floor(Math.random() * 1000000); // Random System ID
+                systemID = Math.floor(Math.random() * 1000000); // Generate random System ID
 
-                // Step 4: Store details in Firestore
+                // Save details to Firestore
                 await addDoc(collection(db, "users"), {
                     name: fullName,
                     email: email,
                     systemID: systemID
                 });
 
-                // Step 5: Save the system ID in LocalStorage
+                // Save system ID in LocalStorage
                 localStorage.setItem('systemID', systemID);
 
-                // Show the system ID
-                document.getElementById('message').innerHTML = `Your System ID is: <strong>${systemID}</strong><br>Use this ID to access the system.`;
+                document.getElementById('message').innerHTML = `
+                    Your System ID is: <strong id="systemIdText">${systemID}</strong> <br>
+                    <small>
+                        Note: This ID is valid as long as browser data is not cleared. If the browser data is cleared, you can generate a new ID. 
+                        Please copy and save this ID to access the website in the future.
+                    </small>
+                `;
+
+                document.getElementById('copyBtn').style.display = 'block';
+                document.getElementById('nextPageBtn').style.display = 'block';
             } else {
                 document.getElementById('message').innerHTML = 'Please fill in all fields.';
             }
+        });
+
+        // Copy System ID to clipboard
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const systemIdText = document.getElementById('systemIdText').textContent;
+            navigator.clipboard.writeText(systemIdText)
+                .then(() => {
+                    alert('System ID copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        });
+
+        // Redirect to next page
+        document.getElementById('nextPageBtn').addEventListener('click', function() {
+            setTimeout(() => {
+                window.location.href = 'enter_system_id.html'; // Replace with your actual second page URL
+            }, 3000);
         });
     </script>
 </body>
