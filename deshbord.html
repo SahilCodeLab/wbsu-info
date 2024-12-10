@@ -3,78 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enter Your Details</title>
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js"></script>
+    <title>Enter System ID</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background-color: #f0f4f8; color: #333; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; }
         .container { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); width: 100%; max-width: 400px; }
         h1 { font-size: 24px; margin-bottom: 20px; color: #333; }
         input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; font-size: 16px; }
-        button { width: 100%; padding: 12px; background-color: #007BFF; color: white; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
+        button { width: 100%; padding: 12px; background-color: #007BFF; color: white; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; margin-top: 10px; }
         button:hover { background-color: #0056b3; }
         #message { margin-top: 20px; font-size: 18px; color: #333; }
-        strong { color: #007BFF; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Enter Your Name and System ID</h1>
+        <h1>Enter System ID</h1>
         <form id="idForm">
-            <input type="text" id="name" placeholder="Enter Your Name" required />
             <input type="text" id="enteredID" placeholder="Enter Your System ID" required />
-            <button type="submit">Submit</button>
+            <button type="submit">Verify ID</button>
         </form>
-        <p id="message"></p>
+        <div id="message"></div>
     </div>
 
+    <!-- Firebase setup -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
     <script>
-        // Firebase Configuration
+        // Firebase configuration
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID",
-            measurementId: "YOUR_MEASUREMENT_ID"
+            apiKey: "AIzaSyC0uWUonhrnW_UaN8LWhDEMWegsxVm2t6I",
+            authDomain: "sr-login-3c465.firebaseapp.com",
+            projectId: "sr-login-3c465",
+            storageBucket: "sr-login-3c465.firebasestorage.app",
+            messagingSenderId: "382591869954",
+            appId: "1:382591869954:web:f590e6ad3024e40929f31b",
+            measurementId: "G-YVX5904N7H"
         };
 
         // Initialize Firebase
         const app = firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore(app);
 
-        // Form submission
+        // Function to verify System ID from Firestore
+        async function verifySystemID(userEnteredID) {
+            const snapshot = await db.collection("system_ids").where("systemID", "==", userEnteredID).get();
+            return !snapshot.empty;  // If document is found, return true
+        }
+
+        // Handle form submission
         document.getElementById('idForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
-            // Get input values
-            const enteredName = document.getElementById('name').value;
             const enteredID = document.getElementById('enteredID').value;
 
-            try {
-                // Check Firebase for System ID
-                const docRef = db.collection("users").doc(enteredID);
-                const doc = await docRef.get();
+            const isValid = await verifySystemID(enteredID);
+            const messageDiv = document.getElementById('message');
 
-                if (doc.exists) {
-                    const userData = doc.data();
-                    
-                    // Validation success
-                    document.getElementById('message').innerHTML = `Hello, ${enteredName}!<br>Your System ID is valid. You will be redirected shortly.`;
-
-                    // Redirect after 3 seconds
-                    setTimeout(function() {
-                        window.location.href = "Sr.html"; // Replace with the actual page URL
-                    }, 3000);
-                } else {
-                    // Invalid System ID
-                    document.getElementById('message').innerHTML = 'Invalid System ID. Please try again.';
-                }
-            } catch (error) {
-                console.error("Error fetching document:", error);
-                document.getElementById('message').innerHTML = 'An error occurred. Please try again later.';
+            if (isValid) {
+                messageDiv.textContent = 'ID is valid! Redirecting to the website...';
+                setTimeout(function() {
+                    window.location.href = 'dashboard.html';  // Redirect to your dashboard or main page
+                }, 2000);
+            } else {
+                messageDiv.textContent = 'Invalid ID. Please generate a valid ID.';
             }
         });
     </script>
