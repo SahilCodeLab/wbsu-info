@@ -3,95 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System ID Generation</title>
+    <title>Generate System ID</title>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background-color: #f0f4f8; color: #333; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; }
-        .container { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); width: 100%; max-width: 400px; }
-        h1 { font-size: 24px; margin-bottom: 20px; color: #333; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; font-size: 16px; }
-        button { width: 100%; padding: 12px; background-color: #007BFF; color: white; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; margin-top: 10px; }
-        button:hover { background-color: #0056b3; }
-        #message { margin-top: 20px; font-size: 18px; color: #333; }
-        #systemIDSection { display: none; margin-top: 20px; }
-        #systemID { font-weight: bold; }
-        .button-container { display: flex; justify-content: space-between; gap: 10px; }
-        .button-container button { width: 48%; }
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            font-size: 16px;
+            color: #28a745;
+            margin-top: 10px;
+        }
+
+        #message {
+            color: #dc3545;
+        }
+
+        .id-entry-section {
+            display: block; /* This will ensure it's always visible */
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Enter Your Details</h1>
         <form id="userForm">
-            <input type="text" id="name" placeholder="Enter Your Name" required />
-            <input type="email" id="email" placeholder="Enter Your Email" required />
-            <button type="submit">Generate System ID</button>
+            <input type="text" id="fullName" placeholder="Enter Full Name" required />
+            <input type="email" id="email" placeholder="Enter Email" required />
+            <button type="submit">Generate ID</button>
         </form>
-
-        <div id="systemIDSection">
-            <h2>Your System ID:</h2>
-            <p id="systemID"></p>
-            <div class="button-container">
-                <button id="copyButton">Copy ID</button>
-                <button id="enterIDButton">Enter System ID</button>
-            </div>
+        
+        <!-- System ID Display and ID Entry Section -->
+        <p id="message"></p>
+        <div id="idEntrySection" class="id-entry-section">
+            <input type="text" id="enteredID" placeholder="Enter Your System ID" required />
+            <button id="openWebsiteButton">Open Website</button>
         </div>
-
-        <div id="message"></div>
     </div>
 
-    <script>
-        // Function to generate a random system ID
-        function generateSystemID() {
-            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            const numbers = '0123456789';
-            let id = 'SR-';
-            for (let i = 0; i < 3; i++) {
-                id += letters.charAt(Math.floor(Math.random() * letters.length));
-            }
-            for (let i = 0; i < 3; i++) {
-                id += numbers.charAt(Math.floor(Math.random() * numbers.length));
-            }
-            return id;
-        }
+    <script type="module">
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC0uWUonhrnW_UaN8LWhDEMWegsxVm2t6I",
+            authDomain: "sr-login-3c465.firebaseapp.com",
+            projectId: "sr-login-3c465",
+            storageBucket: "sr-login-3c465.firebasestorage.app",
+            messagingSenderId: "382591869954",
+            appId: "1:382591869954:web:f590e6ad3024e40929f31b",
+            measurementId: "G-YVX5904N7H"
+        };
 
+        // Importing Firebase methods
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+        import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let systemID; // Variable to store the generated System ID
+        let expirationDate; // Variable to store expiration date
+
+        // Handle form submission
         document.getElementById('userForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Get the entered Name and Email
-            const enteredName = document.getElementById('name').value;
-            const enteredEmail = document.getElementById('email').value;
+            // Get user details
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
 
-            // Generate the System ID
-            const systemID = generateSystemID();
+            if (fullName && email) {
+                // Generate unique system ID
+                systemID = Math.floor(Math.random() * 1000000); // Random System ID generation
+                const currentDate = new Date();
+                expirationDate = new Date(currentDate.setDate(currentDate.getDate() + 365)); // Set expiration date (365 days later)
 
-            // Show the system ID and the buttons
-            document.getElementById('systemID').textContent = systemID;
-            document.getElementById('systemIDSection').style.display = 'block';
-
-            // Store the generated System ID in localStorage
-            localStorage.setItem('systemID', systemID);
-        });
-
-        // Copy System ID to clipboard
-        document.getElementById('copyButton').addEventListener('click', function() {
-            const systemID = document.getElementById('systemID').textContent;
-            navigator.clipboard.writeText(systemID).then(() => {
-                alert('System ID copied to clipboard!');
-            });
-        });
-
-        // Handle Enter System ID button
-        document.getElementById('enterIDButton').addEventListener('click', function() {
-            const savedID = localStorage.getItem('systemID');
-
-            if (savedID) {
-                document.getElementById('message').textContent = 'ID is valid! Redirecting to the website...';
-                setTimeout(function() {
-                    window.location.href = 'deshbord.html'; // Replace with your actual redirect URL
-                }, 2000);
+                // Store details in Firebase
+                addDoc(collection(db, "users"), {
+                    name: fullName,
+                    email: email,
+                    systemID: systemID,
+                    expirationDate: expirationDate.toISOString()
+                }).then(() => {
+                    // Show success message and button for entering ID
+                    document.getElementById('message').innerHTML = `Your System ID is: <strong>${systemID}</strong>`;
+                    document.getElementById('idEntrySection').style.display = 'block';
+                }).catch(error => {
+                    document.getElementById('message').innerHTML = `Error: ${error.message}`;
+                });
             } else {
-                document.getElementById('message').textContent = 'No valid ID found. Please generate a new ID.';
+                document.getElementById('message').innerHTML = 'Please fill in all fields.';
+            }
+        });
+
+        // Handle ID entry and opening website
+        document.getElementById('openWebsiteButton').addEventListener('click', async function() {
+            const enteredID = document.getElementById('enteredID').value;
+
+            // Query Firebase to check if the entered ID is valid and not expired
+            const q = query(collection(db, "users"), where("systemID", "==", parseInt(enteredID)));
+            const querySnapshot = await getDocs(q);
+
+            if (!querySnapshot.empty) {
+                const userDoc = querySnapshot.docs[0].data();
+                const storedExpirationDate = new Date(userDoc.expirationDate);
+                const currentDate = new Date();
+
+                // Check if the ID has expired
+                if (currentDate <= storedExpirationDate) {
+                    // Open the website if ID is valid and not expired
+                    window.location.href = "https://yourwebsite.com"; // Replace with your actual URL
+                } else {
+                    document.getElementById('message').innerHTML = 'Your System ID has expired. Please generate a new ID.';
+                }
+            } else {
+                document.getElementById('message').innerHTML = 'Incorrect System ID. Please try again.';
             }
         });
     </script>
