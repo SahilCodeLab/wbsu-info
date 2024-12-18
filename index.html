@@ -327,24 +327,12 @@ section ul li {
             const querySnapshot = await getDocs(q);
 
             if (!querySnapshot.empty) {
-                const userDoc = querySnapshot.docs[0].data();
-                const storedExpirationDate = new Date(userDoc.expirationDate);
-                const currentDate = new Date();
-
-                if (currentDate <= storedExpirationDate) {
-                    // Show success message and redirect after 3 seconds
-                    successMsg.innerHTML = "System ID verified successfully! Redirecting...";
-                    successMsg.classList.remove("hidden");
-                    setTimeout(() => {
-                        window.location.href = "https://example.com/english-questions"; // Replace with your link
-                    }, 3000); // 3 seconds delay
-                } else {
-                    errorMsg.innerHTML = "Your System ID has expired. Please generate a new ID.";
-                    setTimeout(() => {
-                        errorMsg.innerHTML = ""; // Hide the error message after 3 seconds
-                    }, 3000); // 3 seconds delay
-                    document.getElementById("systemID").value = ""; // Clear input
-                }
+                // Show success message and redirect after 3 seconds
+                successMsg.innerHTML = "System ID verified successfully! Redirecting...";
+                successMsg.classList.remove("hidden");
+                setTimeout(() => {
+                    window.location.href = "https://example.com/english-questions"; // Replace with your link
+                }, 3000); // 3 seconds delay
             } else {
                 // Show different error messages for invalid IDs
                 if (userID.length !== 10) {
