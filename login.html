@@ -26,16 +26,17 @@
 
         .container {
             background-color: #fff;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 600px;
             text-align: center;
+            font-size: 16px;
         }
 
         h1 {
-            font-size: 24px;
+            font-size: 28px;
             color: #007BFF;
             margin-bottom: 20px;
         }
@@ -86,8 +87,9 @@
         }
 
         header img {
-            max-width: 500px;
-            height: 195px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
         }
 
         #copyButton {
@@ -97,6 +99,26 @@
 
         #copyButton:hover {
             background-color: #218838;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            input {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 20px;
+                width: 100%;
+                max-width: 400px;
+            }
         }
     </style>
 </head>
@@ -195,7 +217,7 @@
         document.getElementById('copyButton').addEventListener('click', function() {
             const idText = document.getElementById('generatedID').innerText;
             navigator.clipboard.writeText(idText).then(() => {
-                alert('System ID copied to clipboard! Please note it down, as the website will not open without it.!');
+                alert('System ID copied to clipboard! Please note it down, as the website will not open without it!');
             });
         });
 
