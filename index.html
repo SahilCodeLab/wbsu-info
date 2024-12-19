@@ -151,6 +151,49 @@ section ul li {
     margin-bottom: 10px; /* Add space between list items */
 }
 
+ h2  {
+    color: #007BFF !important;
+}
+        .contact-form {
+            margin: 20px 0;
+            padding: 20px;
+            background: #e7f3fe;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        input[type="submit"]:hover {
+            background: #3e0072;
+        }
+        .bold-act {
+    font-weight: bold;
+    font-size: 1.3em; /* Adjust size if needed */
+}
+p strong {
+    font-weight: bold !important;
+}
+
+
+
         footer {
             background-color: #007BFF;
             color: white;
@@ -645,6 +688,66 @@ section ul li {
         }
     </style>
 </section>
+
+
+
+</section>
+
+<section class="contact-form">
+    <h2>Contact Us</h2>
+    <form action="https://formspree.io/f/xdkoogaj" method="POST" id="contact-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <input type="submit" value="Submit">
+        <p id="success-message" style="display:none; color: green;"></p>
+        <p id="error-message" style="display:none; color: red;"></p>
+    </form>
+</section>
+
+<script>
+    const form = document.getElementById('contact-form');
+    const submitButton = form.querySelector('input[type="submit"]');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        successMessage.style.display = 'none'; // Hide success message
+        errorMessage.style.display = 'none'; // Hide error message
+        submitButton.value = 'Sending...'; // Change button text
+
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                successMessage.textContent = 'Thank you for your message!';
+                successMessage.style.display = 'block'; // Show success message
+                submitButton.value = 'Sent'; // Change button text to 'Sent'
+                form.reset();
+            } else {
+                errorMessage.textContent = 'There was a problem submitting your form. Please try again.';
+                errorMessage.style.display = 'block'; // Show error message
+                submitButton.value = 'Submit'; // Reset button text
+            }
+        }).catch(error => {
+            errorMessage.textContent = 'Network error. Please check your connection.';
+            errorMessage.style.display = 'block'; // Show error message
+            submitButton.value = 'Submit'; // Reset button text
+        });
+    });
+</script>
+
 
 
 
