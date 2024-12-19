@@ -357,9 +357,174 @@ section ul li {
 <!-- NEW SACTION START Section -->
 
 
+<section>
+    <h2>Film study</h2>
+    <h5>Presantacen of film studys:-</h5>
 
+    <br>
+    <ul>
+        <li>
+           <b> Q&A from film study </b>
+            <a href="#" onclick="requestSystemID()">
 
+              Q&A Based on film study</a> <b>click this link</b>
+        </li>
 
+        <li> <b>First login to generate your system ID </b>
+
+        </li>
+        <li> <b>Enter your system ID To Access Material</b>
+</li>
+    </ul>
+</section>
+
+<div id="message" class="error-message"></div>
+<div id="promptBox" class="hidden">
+    <div class="promptContent">
+        <label for="systemID">Enter your System ID:</label>
+        <input type="text" id="systemID" placeholder="Enter System ID" />
+        <div id="errorMsg" class="error-message"></div>
+        <div id="successMsg" class="success-message hidden"></div>
+        <button onclick="validateID()">Submit</button>
+        <button onclick="closePrompt()">Cancel</button>
+    </div>
+</div>
+
+<style>
+    /* Styling for the prompt box */
+    .hidden {
+        display: none;
+    }
+    #promptBox {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 320px;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        z-index: 1000;
+    }
+    .promptContent {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    #systemID {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 16px;
+    }
+    button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    .success-message {
+        color: green;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+</style>
+
+<script type="module">
+    // Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyC0uWUonhrnW_UaN8LWhDEMWegsxVm2t6I",
+        authDomain: "sr-login-3c465.firebaseapp.com",
+        projectId: "sr-login-3c465",
+        storageBucket: "sr-login-3c465.appspot.com",
+        messagingSenderId: "382591869954",
+        appId: "1:382591869954:web:f590e6ad3024e40929f31b",
+        measurementId: "G-YVX5904N7H"
+    };
+
+    // Import Firebase methods
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Open the prompt box
+    window.requestSystemID = function () {
+        document.getElementById("promptBox").classList.remove("hidden");
+        document.getElementById("errorMsg").innerHTML = ""; // Clear previous error messages
+    };
+
+    // Close the prompt box
+    window.closePrompt = function () {
+        document.getElementById("promptBox").classList.add("hidden");
+        document.getElementById("systemID").value = ""; // Clear input
+    };
+
+    // Validate System ID
+    window.validateID = async function () {
+        const userID = document.getElementById("systemID").value.trim();
+        const errorMsg = document.getElementById("errorMsg");
+        const successMsg = document.getElementById("successMsg");
+
+        if (!userID) {
+            errorMsg.innerHTML = "System ID is required!";
+            setTimeout(() => {
+                errorMsg.innerHTML = ""; // Hide the error message after 3 seconds
+            }, 3000); // 3 seconds delay
+            return;
+        }
+
+        try {
+            // Query Firebase for the entered System ID
+            const q = query(collection(db, "users"), where("systemID", "==", userID));
+            const querySnapshot = await getDocs(q);
+
+            if (!querySnapshot.empty) {
+                // Show success message and redirect after 3 seconds
+                successMsg.innerHTML = "System ID verified successfully! Redirecting...";
+                successMsg.classList.remove("hidden");
+                setTimeout(() => {
+                    window.location.href = "filmstudy.html"; // Replace with your link
+                }, 3000); // 3 seconds delay
+            } else {
+                // Show different error messages for invalid IDs
+                if (userID.length !== 10) {
+                    errorMsg.innerHTML = "Invalid System ID format. Please try again.";
+                } else {
+                    errorMsg.innerHTML = "Invalid System ID. Please try again.";
+                }
+                setTimeout(() => {
+                    errorMsg.innerHTML = ""; // Hide the error message after 3 seconds
+                }, 3000); // 3 seconds delay
+                document.getElementById("systemID").value = ""; // Clear input
+            }
+        } catch (error) {
+            console.error("Error verifying System ID:", error);
+            alert("An error occurred while verifying your System ID. Please try again later.");
+        }
+    };
+            </script>
+
+<!-- NEW SACTION START Section -->
+<!-- NEW SACTION START Section -->
+<!-- NEW SACTION START Section -->
+<!-- NEW SACTION START Section -->
 
 
 
