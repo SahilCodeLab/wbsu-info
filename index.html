@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to our website. Loading, please wait. Explore more content after the page loads.">
+    <meta name="keywords" content="website loading, loading page, redirect, Google Analytics, SEO, organization, schema.org">
+    <meta name="author" content="Your Name">
+    <meta name="robots" content="index, follow">
+
+    <title>Www.Sahilcodelab.com</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://i.pinimg.com/736x/0f/f6/ba/0ff6ba69d278fffc14b4ecf3584a67d3.jpg" type="image/x-icon">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSDWC8KC2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3PSDWC8KC2'); // Replace with your Google Analytics Measurement ID
+    </script>
+
+<!-- Schema.org JSON-LD for Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "url": "https://sahilcodelab.github.io/join/",  <!-- Replace with your actual URL -->
+  "logo": "https://i.pinimg.com/736x/0f/f6/ba/0ff6ba69d278fffc14b4ecf3584a67d3.jpg",  <!-- Replace with your actual logo path -->
+  "name": "Sahil Code Lab",  <!-- Replace with your organization name -->
+  "description": "Sahil Code Lab provides comprehensive resources for web development, programming, and coding. From detailed tutorials to coding tools and e-books, we offer everything you need for learning and mastering web technologies. Whether you're a beginner or an experienced developer, here you'll find study materials, e-books, assignments, and guides to help you excel in your coding journey. Join our community and access the best resources to boost your skills and knowledge."
+}
+</script>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        .circle-loader {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .circle-loader div {
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border-radius: 50%;
+            animation: bounce 1s infinite ease-in-out;
+        }
+        .circle-loader div:nth-child(1) { animation-delay: 0s; }
+        .circle-loader div:nth-child(2) { animation-delay: 0.2s; }
+        .circle-loader div:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Optional: Loader animation for mobile view */
+        @media (max-width: 600px) {
+            .circle-loader div {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="circle-loader">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="loading-text">Loading... Please Wait</div>
+    </div>
+
+    <script>
+        // Redirect to another page after 5 seconds
+        setTimeout(function() {
+            window.location.href = 'main.html'; // Replace 'main.html' with your destination URL
+        }, 5000);
+    </script>
+</body>
+</html>
