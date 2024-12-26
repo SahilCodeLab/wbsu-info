@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href='https://i.pinimg.com/736x/ef/c8/25/efc8255e3dc062530d2153b5fe807732.jpg' rel='icon' type='image/x-icon'/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Header with Image</title>
+    
+  <header>
+    <img src="https://i.pinimg.com/736x/29/2d/70/292d708e8c9b94de081eaf32e85c4163.jpg" alt="Image is loading">
+</header>  
+  
+       <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "url": "https://sahilcodelab.github.io/join/",
+    "logo": "https://i.pinimg.com/736x/86/7b/81/867b8190baed0dc3e920e6a03e3d8a84.jpg"
+  }
+  </script>
+    
+    
+    <style>
+           img {
+            width: 100%;
+            margin-left: 18px;
+            margin-top: -231px;
+            height: auto;
+            border-radius: 0px;
+            margin-bottom: 56.5px;
+        }
+    body {
+      
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    height: 100%; /* Full height */
+    width: 100%; /* Full width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden; /* Disable horizontal scrolling */
+    position: fixed; /* Keep the body fixed */
+    background-color: #f8f9fa; /* Background color of the body */
+    transform: translateX(-5%); /* Adjust body position by shifting to the right by 10% */
+}
+    
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f8f9fa;
+}
+
+.search-container {
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    margin-left:37px;
+}
+
+
+
+.search-container h3 {
+    font-size: 1rem;
+    font-weight: 900;
+    margin-top: -67px;
+    color: #4285f4;
+    margin-bottom: 5px;
+    font-family: 'Product Sans', Arial, sans-serif;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 24px;
+    padding: 10px;
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 8px;
+    width: 100%;
+}
+
+.search-box button {
+    background-color: #4285f4;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-box button:hover {
+    background-color: #357ae8;
+}
+
+.powered-by {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #888;
+    font-style: italic;
+}
+
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+    .search-box {
+        width: 90%; /* Full width for smaller screens */
+    }
+    .search-box input {
+        font-size: 0.9rem;
+        padding: 6px;
+    }
+    .search-box button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    .paragraph {
+        padding: 0 10px;
+    }
+    .paragraph p {
+      margin-top:10px;
+      color:#888;
+        
+    }
+}
+    </style>
+
+
+    
+        
+        <div class="search-container">
+        <h3>Ebook-research</h3>
+        
+        <div class="search-box">
+            <input type="text" id="bookTitle" placeholder="Enter the title of the book" />
+            <button onclick="searchEbook()">Search</button>
+        </div>
+        <div class="powered-by"> <b>Powered by Google </b> </div>
+        <div class="paragraph">
+            <p>Search for ebooks in PDF, EPUB, or MOBI formats tailored for WBSU all semesters, offering notes, questions, answers, assignments, letters, and more—everything you need for smooth study. <b>By SAHIL</b> </p>
+            <p>
+              A simple search ensures quick access to WBSU study materials, making learning efficient.
+            </p>
+        </div>
+    </div>
+
+    
+
+
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        function searchEbook() {
+            const bookTitle = document.getElementById("bookTitle").value.trim();
+            if (!bookTitle) {
+                alert("Please enter a book title.");
+                return;
+            }
+            const googleDork = `intext:"${bookTitle}" filetype:pdf OR filetype:epub OR filetype:mobi`;
+            const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(googleDork)}`;
+            window.location.href = searchUrl; // Change this line to open in the same tab
+        }
+
+        // Add event listener for the Enter key
+        document.getElementById("bookTitle").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent form submission
+                searchEbook(); // Call the search function
+            }
+        });
+    </script>
+
+
+<script type='text/javascript'>
+    window.setTimeout(function() {
+        document.body.className = document.body.className.replace('loading', '');
+      }, 10);
+  </script>
+
+<script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/745881458-widgets.js"></script>
+<script type='text/javascript'>
+window['__wavt'] = 'AOuZoY6tJbUQiMJX5EM7k_skkzl1MAyyUw:1734864512940';_WidgetManager._Init('//draft.blogger.com/rearrange?blogID\x3d4597019357135290759','//buzz2dayebookfinder.blogspot.com/','4597019357135290759');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '4597019357135290759', 'title': 'Buzz2Day Ebook Search Engine', 'url': 'https://buzz2dayebookfinder.blogspot.com/', 'canonicalUrl': 'https://buzz2dayebookfinder.blogspot.com/', 'homepageUrl': 'https://buzz2dayebookfinder.blogspot.com/', 'searchUrl': 'https://buzz2dayebookfinder.blogspot.com/search', 'canonicalHomepageUrl': 'https://buzz2dayebookfinder.blogspot.com/', 'blogspotFaviconUrl': 'https://buzz2dayebookfinder.blogspot.com/favicon.ico', 'bloggerUrl': 'https://draft.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': true, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Buzz2Day Ebook Search Engine - Atom\x22 href\x3d\x22https://buzz2dayebookfinder.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22Buzz2Day Ebook Search Engine - RSS\x22 href\x3d\x22https://buzz2dayebookfinder.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Buzz2Day Ebook Search Engine - Atom\x22 href\x3d\x22https://draft.blogger.com/feeds/4597019357135290759/posts/default\x22 /\x3e\n', 'meTag': '\x3clink rel\x3d\x22me\x22 href\x3d\x22https://draft.blogger.com/profile/05791475903635858649\x22 /\x3e\n', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': false, 'adsenseAutoAds': false, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/6a34aa7ed4e10f71', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Share to X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'index', 'pageName': '', 'pageTitle': 'Buzz2Day Ebook Search Engine', 'metaDescription': 'Buzz2Day Ebook Finder is a powerful tool by Buzz2Day Tech, designed to help you quickly find and access free PDF ebooks directly from Google.'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'isResponsive': false, 'isAlternateRendering': false, 'isCustom': false}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': 'Buzz2Day Ebook Search Engine', 'description': 'Buzz2Day Ebook Finder is a powerful tool by Buzz2Day Tech, designed to help you quickly find and access free PDF ebooks directly from Google.', 'url': 'https://buzz2dayebookfinder.blogspot.com/', 'type': 'feed', 'isSingleItem': false, 'isMultipleItems': true, 'isError': false, 'isPage': false, 'isPost': false, 'isHomepage': true, 'isArchive': false, 'isLabelSearch': false}}]);
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML6', 'header', document.getElementById('HTML6'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'navMessage': 'No posts.'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_StatsView', new _WidgetInfo('Stats1', 'footer-1', document.getElementById('Stats1'), {'title': 'Total Visitors', 'showGraphicalCounter': true, 'showAnimatedCounter': true, 'showSparkline': false, 'statsUrl': '//buzz2dayebookfinder.blogspot.com/b/stats?style\x3dBLACK_TRANSPARENT\x26timeRange\x3dALL_TIME\x26token\x3dAPq4FmAN9rILM0qHg012u6RO4cjgVfGbUJqLBonMAfzlCDCJ836Q4-oyuWDfdHEIoHkMllxMHEXqWLoxorFQH7huc7IDtfa71w'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'footer-3', document.getElementById('Attribution1'), {}, 'displayModeFull'));
+</script>
+<section class="social-icons">
+  <a href="https://instagram.com/sahil.editor.96" target="_blank">
+    <i class="fab fa-instagram"></i>
+  </a>
+ <a href="https://wa.me/918100017431?text=Hello,%20If%20you%20face%20any%20issue,%20you%20can%20ask%20me." target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+  <a href="https://linkedin.com/in/username" target="_blank">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+</section>
+<style>
+  .social-icons {
+  display: flex; /* Flexbox for horizontal alignment */
+  gap: 20px; /* Space between icons */
+  position: relative; /* Required for absolute positioning */
+  justify-content: center; /* Center icons */
+}
+
+.social-icons a {
+  font-size: 24px; /* Icon size */
+  color: #4285f4; /* Icon color */
+  text-decoration: none; /* Remove underline */
+  position: absolute; /* Necessary for positioning */
+  border-radius: 50%; /* Circular icon design */
+  background-color: #FFFFFF; /* Background color for better design */
+  padding: 10px; /* Padding inside the icon */
+  display: flex; /* Align icons vertically and horizontally */
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease, background-color 0.3s ease; /* Hover effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+}
+
+/* Hover effect */
+.social-icons a:hover {
+  color: #000000; /* LinkedIn blue hover effect */
+  background-color: #fff; /* Light background on hover */
+}
+
+/* Move icons */
+.social-icons a:nth-child(1) {
+  left: -100px; /* Left alignment */
+  top: 10px; /* Top alignment */
+}
+
+.social-icons a:nth-child(2) {
+  left: -10px; /* Right alignment with spacing */
+  top: 10px;
+}
+
+.social-icons a:nth-child(3) {
+  left: 90px; /* Right alignment with spacing */
+  top: 10px; /* Slightly lower positioning */
+}
+
+
+
+
+</style>
+<footer class="footer">
+  <div class="footer-links">
+  <a href="#privacy-policy" class="footer-link" onclick="showMessage('privacy')">Privacy Policy</a>
+  <a href="#terms-conditions" class="footer-link" onclick="showMessage('terms')">Terms & Conditions</a>
+</div>
+
+<script>
+  function showMessage(type) {
+    if (type === 'privacy') {
+      alert('Your data is fully secure and protected. If you have any questions or concerns, feel free to reach out.');
+    } else if (type === 'terms') {
+      alert('By using this website, you agree to comply with these terms and conditions. The content on this site is protected by intellectual property rights and cannot be used without permission. We are not responsible for any errors, disruptions, or external links. Our Privacy Policy explains how your data is handled. Continued use indicates acceptance of any updates to these terms.');
+    }
+  }
+</script>
+  <h4 class="footer-text"> <b>© 2024 All Rights Reserved </b> </h4>
+</footer>
+<style>
+ /* Footer container */
+.footer {
+  background-color: #333; /* Footer background color */
+  color: #fff; /* Text color */
+  text-align: center; /* Center text */
+  padding: 50px 10px; /* Padding for spacing */
+  margin-left:25px;
+  margin-bottom: -30px;
+  position: absolute; /* Positioning the footer absolutely */
+  bottom: 0; /* Stick to the bottom of the page */
+  width: 100%; /* Full width */
+  z-index: 1; /* Ensures it comes above other content */
+}
+
+/* Footer content wrapper */
+.footer-content {
+  position: relative; /* Allows
+  positioning of child elements */
+  display: flex; /* Flexbox for centering the content */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center the content */
+}
+
+/* Footer text (© 2024 All Rights Reserved) */
+.footer-text {
+  font-size: 14px; /* Font size */
+  margin-top: 20px;
+  font-weight: normal; /* Normal font weight */
+  color: #aaa; /* Muted text color */
+  margin-bottom: -10px; /* Space below the text *
+  z-index: 2; /* Ensures text stays above links */
+  position: relative; /* Allows positioning */
+}
+
+/* Footer links */
+.footer-links {
+  display: flex; /* Flexbox for alignment */
+  gap: 20px; /* Space between links */
+  justify-content: center; /* Centering the links */
+  position: relative; /* Allows overlap with text */
+  z-index: 3; /* Ensures links are above the text */
+}
+
+/* Footer link styling */
+.footer-link {
+  color: #ccc; /* Link color */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Bold text */
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.footer-link:hover {
+  color: #fff; /* Bright color on hover */
+}
+
+/* Footer links hover movement */
+.footer-links:hover {
+  transform: translateY(-5px); /* Adds slight upward movement on hover */
+}
+</style>
+</body>
+</html>
