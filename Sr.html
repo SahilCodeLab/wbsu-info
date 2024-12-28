@@ -632,7 +632,20 @@ function showPDFStatus(id) {
             window.location.href = fileLinks[id]; // Redirect to the file link
         }, 3000);
 
+} else {
+        statusElement.innerHTML = "<span style='color: red;'>Available soon</span>";
+    }
+}
 
+// Add event listeners to update status when links are clicked
+document.querySelectorAll('.material a').forEach((link) => {
+    const id = link.href.split('/').pop().replace('.pdf', '');
+    link.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent default link behavior
+        showPDFStatus(id); // Show current status
+    });
+});
+</script>
 
             </div>
         </div>
