@@ -89,7 +89,7 @@
         .hero button:hover {
             background: #3367d6;
         }
-        
+
         .card {
             background: white;
             border-radius: 8px;
@@ -269,7 +269,7 @@ button:active {
     </style>
 </head>
 <body>
-  
+
     <header>
         <h1>Students Help</h1>
         <div class="hamburger" onclick="toggleMenu()">
@@ -299,7 +299,7 @@ button:active {
     <i class="fa fa-group"></i> <b>Join group</b>
 </button>
     </div>
-    
+
     <div class="signature">Sahil</div>
 
 <style>
@@ -338,19 +338,19 @@ button:active {
             <div class="status" id="status-film-studies"></div>
             <a href="files/film-studies.pdf" download>Download PDF</a>
         </div>
-        
+
         <!-- Mathematics -->
         <div class="material">
-            <h3>Mathematics</h3>
-            <div class="status" id="status-mathematics"></div>
-            <a href="files/mathematics.pdf" download>Download PDF</a>
+            <h3>Bangali</h3>
+            <div class="status" id="status-Bangali"></div>
+            <a href="files/Bangali.pdf" download>Download PDF</a>
         </div>
-        
-        <!-- Physics -->
+
+        <!-- Commerce -->
         <div class="material">
-            <h3>Physics</h3>
-            <div class="status" id="status-physics"></div>
-            <a href="files/physics.pdf" download>Download PDF</a>
+            <h3>Commerce GE1</h3>
+            <div class="status" id="status-commerce"></div>
+            <a href="files/commerce.pdf" download>Download PDF</a>
         </div>
 
         <!-- Computer Science -->
@@ -367,13 +367,12 @@ button:active {
             <a href="files/chemistry.pdf" download>Download PDF</a>
         </div>
 
-        <!-- Biology -->
+        <!-- Urdu -->
         <div class="material">
-            <h3>Biology</h3>
-            <div class="status" id="status-biology"></div>
-            <a href="files/biology.pdf" download>Download PDF</a>
+            <h3>Urdu</h3>
+            <div class="status" id="status-Urdu"></div>
+            <a href="files/Urdu.pdf" download>Download PDF</a>
         </div>
-
         <!-- English -->
         <div class="material">
             <h3>English</h3>
@@ -458,11 +457,11 @@ button:active {
             <a href="files/sociology.pdf" download>Download PDF</a>
         </div>
 
-        <!-- Women’s Studies -->
+        <!-- ’s Studies -->
         <div class="material">
-            <h3>Women’s Studies</h3>
-            <div class="status" id="status-womens-studies"></div>
-            <a href="files/womens-studies.pdf" download>Download PDF</a>
+            <h3>Zoology</h3>
+            <div class="status" id="status-Zoology"></div>
+            <a href="files/Zoology.pdf" download>Download PDF</a>
         </div>
 
         <!-- Accounting and Finance -->
@@ -527,7 +526,7 @@ button:active {
         flex: 1 1 calc(33% - 20px);
         background: #fff;
         padding: 20px;
-        
+
         border: 1px solid #ddd;
         border-radius: 5px;
         text-align: center;
@@ -559,24 +558,24 @@ button:active {
 // Availability status
 const materials = {
     "film-studies": true,
-    "mathematics": true,
-    "physics": false,
+    "Bangali": true,
+    "commerce": true,
     "computer-science": true,
-    "chemistry": false,
-    "biology": true,
-    "english": false,
-    "envs": false,
+    "chemistry": true,
+    "Urdu": true,
+    "english": true,
+    "envs": true,
     "history": true,
     "physical-education": false,
     "hindi": false,
     "human-rights": false,
-    "journalism": false,
-    "philosophy": false,
-    "political-science": false,
+    "journalism": true,
+    "philosophy": true,
+    "political-science": true,
     "psychology": false,
     "sanskrit": false,
     "sociology": false,
-    "womens-studies": false,
+    "Zoology": true,
     "accounting-finance": false,
     "business-law": false,
     "marketing-management": false,
@@ -589,13 +588,37 @@ const materials = {
 // File links
 const fileLinks = {
     "film-studies": "https://drive.google.com/file/d/1tLHTLhED_jIwmltP243dFuAdGJpGTJ9R/view?usp=drivesdk=sharing", // Film Studies
+    
     "mathematics": "https://drive.google.com/file/d/2abcDEF123GHI456jklMNO789/view?usp=sharing", // Mathematics
+    
     "computer-science": "https://drive.google.com/file/d/3abcDEF123GHI456jklMNO789/view?usp=sharing", // Computer Science
+    
     "biology": "https://drive.google.com/file/d/4abcDEF123GHI456jklMNO789/view?usp=sharing", // Biology
     // Add more links as necessary
-    
+
         "history": "https://drive.google.com/file/d/1tLHTLhED_jIwmltP243dFuAdGJpGTJ9R/view?usp=drivesdk=sharing", // Film Studies
+        
+        "political-science": "https://drive.google.com/file/d/1YDHjNTi1Z6lghLbmDMfl1XlNrDuqYgXV/view?usp=drivesdk=sharing",
+        
+     "philosophy": "https://drive.google.com/file/d/1YE1mgEYcwz-SOOQn3rLxNukOABV0JIVr/view?usp=drivesdk=sharing",
+     
+      "Bangali": "https://drive.google.com/file/d/1-gPjTr2coA1hoE4hFnZOEsJoW6SAiokd/view?usp=drivesdk=sharing",
+      
+       "english": "https://drive.google.com/file/d/1YEI222JKFoPyIkDlrKrh-coUJ46ZgjFb/view?usp=drivesdk=sharing",
+       
+        "commerce": "https://drive.google.com/file/d/1YEgvRSdINUlc7bvs3LBJrBfcrZD_CGLu/view?usp=drivesdk=sharing",
+        
+        "Urdu": "https://drive.google.com/file/d/1YVS2B7Qw6Wy5sjIKz0jKmQeuUEGKBOU6/view?usp=drivesdk=sharing",
+        
+        "chemistry": "https://drive.google.com/file/d/1YJmNv5xC6j5KT7gzS_YpSjFZehaApL2o/view?usp=drivesdk=sharing",
+        
+         "journalism": "https://drive.google.com/file/d/1YQlvIORTxzUYRe70e1F3qdUQyduVGPwQ/view?usp=drivesdk=sharing",
+         
+         "Zoology": "https://drive.google.com/file/d/1YVat54nfT1ieoYD5g4To8BvYoduijxT6/view?usp=drivesdk=sharing",
+         
+         "envs": "https://drive.google.com/file/d/1YO1cWEQ2LfNVEC4duc6EzpCflxG-waX5/view?usp=drivesdk=sharing",
 };
+
 
 // Function to display status
 function showPDFStatus(id) {
@@ -608,23 +631,9 @@ function showPDFStatus(id) {
             statusElement.innerHTML = ""; // Hide message after 3 seconds
             window.location.href = fileLinks[id]; // Redirect to the file link
         }, 3000);
-    } else {
-        statusElement.innerHTML = "<span style='color: red;'>Available soon</span>";
-    }
-}
 
-// Add event listeners to update status when links are clicked
-document.querySelectorAll('.material a').forEach((link) => {
-    const id = link.href.split('/').pop().replace('.pdf', '');
-    link.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent default link behavior
-        showPDFStatus(id); // Show current status
-    });
-});
-</script>
-        
-                
-                
+
+
             </div>
         </div>
     </section>
