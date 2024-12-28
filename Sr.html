@@ -554,8 +554,9 @@ button:active {
     }
 </style>
 
+
 <script>
-  // Availability status
+// Availability status
 const materials = {
     "film-studies": true,
     "mathematics": true,
@@ -565,7 +566,7 @@ const materials = {
     "biology": true,
     "english": false,
     "envs": false,
-    "history": false,
+    "history": true,
     "physical-education": false,
     "hindi": false,
     "human-rights": false,
@@ -585,6 +586,17 @@ const materials = {
     "corporate-law": false
 };
 
+// File links
+const fileLinks = {
+    "film-studies": "https://drive.google.com/file/d/1tLHTLhED_jIwmltP243dFuAdGJpGTJ9R/view?usp=drivesdk=sharing", // Film Studies
+    "mathematics": "https://drive.google.com/file/d/2abcDEF123GHI456jklMNO789/view?usp=sharing", // Mathematics
+    "computer-science": "https://drive.google.com/file/d/3abcDEF123GHI456jklMNO789/view?usp=sharing", // Computer Science
+    "biology": "https://drive.google.com/file/d/4abcDEF123GHI456jklMNO789/view?usp=sharing", // Biology
+    // Add more links as necessary
+    
+        "history": "https://drive.google.com/file/d/1tLHTLhED_jIwmltP243dFuAdGJpGTJ9R/view?usp=drivesdk=sharing", // Film Studies
+};
+
 // Function to display status
 function showPDFStatus(id) {
     const statusElements = document.querySelectorAll('.status'); // Get all status elements
@@ -594,10 +606,10 @@ function showPDFStatus(id) {
         statusElement.innerHTML = "<span style='color: green;'>PDF Available</span>";
         setTimeout(() => {
             statusElement.innerHTML = ""; // Hide message after 3 seconds
-            window.location.href = `files/${id}.pdf`; // Redirect after 3 seconds
+            window.location.href = fileLinks[id]; // Redirect to the file link
         }, 3000);
     } else {
-        statusElement.innerHTML = "<span style='color: red;'> Available soon</span>";
+        statusElement.innerHTML = "<span style='color: red;'>Available soon</span>";
     }
 }
 
