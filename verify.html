@@ -72,7 +72,7 @@
             color: #037BFF;
             margin-bottom: 20px;
         }
-        
+
         .h1-led-sahil {
     font-size: 24px;
     color: #04FFEA;
@@ -230,7 +230,7 @@ p strong {
 <body>
 
 <header>
-  
+
 <h1 class="h1-led-sahil">
     <span style="--char: 0">S</span>
     <span style="--char: 1">A</span>
@@ -238,11 +238,11 @@ p strong {
     <span style="--char: 3">I</span>
     <span style="--char: 4">L</span>
 </h1>
-        
+
 <h4>"Education is the key to unlocking your potential." - Sahil</h4>
-       
+
        <p><b>First, log in. A system ID will be generated. Enter it to open the study material.</b></p>
-        
+
 </header>
 
 <div class="container">
@@ -259,8 +259,6 @@ p strong {
 <!-- NEW SACTION START Section -->
 <!-- NEW SACTION START Section -->
 <!-- NEW SACTION START Section -->
-
-
 <section>
     <h2>Political Science</h2>
     <h5> Project assignment:-</h5>
@@ -269,191 +267,31 @@ p strong {
     <ul>
         <li>
            <b> Assignment </b>
-            <a href="#" onclick="requestSystemID()">
-
-              Political Assignment</a> <b>click this link</b>
+            <a href="#" onclick="requestSystemID('political')">Political Assignment</a> <b>click this link</b>
         </li>
 
         <li> <b>First login to generate your system ID </b>
 
         </li>
-        <li> <b>Enter your system ID To Access Assignment</b>
-</li>
+        <li> <b>Enter your system ID To Access Assignment</b></li>
     </ul>
 </section>
 
-<div id="message" class="error-message"></div>
-<div id="promptBox" class="hidden">
-    <div class="promptContent">
-        <label for="systemID">Enter your System ID:</label>
-        <input type="text" id="systemID" placeholder="Enter System ID" />
-        <div id="errorMsg" class="error-message"></div>
-        <div id="successMsg" class="success-message hidden"></div>
-        <button onclick="validateID()">Submit</button>
-        <button onclick="closePrompt()">Cancel</button>
-    </div>
-</div>
-
-<style>
-    /* Styling for the prompt box */
-    .hidden {
-        display: none;
-    }
-    #promptBox {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 320px;
-        padding: 20px;
-        background-color: #ffffff;
-        border: 1px solid #ddd;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        z-index: 1000;
-    }
-    .promptContent {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-    #systemID {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-        font-size: 16px;
-    }
-    button {
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: white;
-        cursor: pointer;
-        transition: background-color 0.3s ease-in-out;
-    }
-    button:hover {
-        background-color: #0056b3;
-    }
-    .error-message {
-        color: red;
-        font-size: 14px;
-        margin-top: 5px;
-    }
-    .success-message {
-        color: green;
-        font-size: 14px;
-        margin-top: 5px;
-    }
-</style>
-
-<script type="module">
-    // Firebase Configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyC0uWUonhrnW_UaN8LWhDEMWegsxVm2t6I",
-        authDomain: "sr-login-3c465.firebaseapp.com",
-        projectId: "sr-login-3c465",
-        storageBucket: "sr-login-3c465.appspot.com",
-        messagingSenderId: "382591869954",
-        appId: "1:382591869954:web:f590e6ad3024e40929f31b",
-        measurementId: "G-YVX5904N7H"
-    };
-
-    // Import Firebase methods
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
-    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // Open the prompt box
-    window.requestSystemID = function () {
-        document.getElementById("promptBox").classList.remove("hidden");
-        document.getElementById("errorMsg").innerHTML = ""; // Clear previous error messages
-    };
-
-    // Close the prompt box
-    window.closePrompt = function () {
-        document.getElementById("promptBox").classList.add("hidden");
-        document.getElementById("systemID").value = ""; // Clear input
-    };
-
-    // Validate System ID
-    window.validateID = async function () {
-        const userID = document.getElementById("systemID").value.trim();
-        const errorMsg = document.getElementById("errorMsg");
-        const successMsg = document.getElementById("successMsg");
-
-        if (!userID) {
-            errorMsg.innerHTML = "System ID is required!";
-            setTimeout(() => {
-                errorMsg.innerHTML = ""; // Hide the error message after 3 seconds
-            }, 3000); // 3 seconds delay
-            return;
-        }
-
-        try {
-            // Query Firebase for the entered System ID
-            const q = query(collection(db, "users"), where("systemID", "==", userID));
-            const querySnapshot = await getDocs(q);
-
-            if (!querySnapshot.empty) {
-                // Show success message and redirect after 3 seconds
-                successMsg.innerHTML = "System ID verified successfully! Redirecting...";
-                successMsg.classList.remove("hidden");
-                setTimeout(() => {
-                    window.location.href = "politicalassignment"; // Replace with your link
-                }, 3000); // 3 seconds delay
-            } else {
-                // Show different error messages for invalid IDs
-                if (userID.length !== 10) {
-                    errorMsg.innerHTML = "Invalid System ID format. Please try again.";
-                } else {
-                    errorMsg.innerHTML = "Invalid System ID. Please try again.";
-                }
-                setTimeout(() => {
-                    errorMsg.innerHTML = ""; // Hide the error message after 3 seconds
-                }, 3000); // 3 seconds delay
-                document.getElementById("systemID").value = ""; // Clear input
-            }
-        } catch (error) {
-            console.error("Error verifying System ID:", error);
-            alert("An error occurred while verifying your System ID. Please try again later.");
-        }
-    };
-            </script>
-
-<!-- NEW SACTION START Section -->
-<!-- NEW SACTION START Section -->
-<!-- NEW SACTION START Section -->
-<!-- NEW SACTION START Section -->
-
-
-
-
-
-
-
 <section>
-    <h2>HISTORY</h2>
-    <h5>History Of Ancient India V.D Mahajan:-</h5>
+    <h2>English Subject</h2>
+    <h5> Project assignment:-</h5>
 
     <br>
     <ul>
         <li>
-           <b> Q&A from V.D. Mahajan's Ancient India </b>
-            <a href="#" onclick="requestSystemID()">
-
-              Q&A Based on History</a> <b>click this link</b>
+           <b> Assignment </b>
+            <a href="#" onclick="requestSystemID('English')">English Assignment</a> <b>click this link</b>
         </li>
 
         <li> <b>First login to generate your system ID </b>
 
         </li>
-        <li> <b>Enter your system ID To Access Material</b>
-</li>
+        <li> <b>Enter your system ID To Access Assignment</b></li>
     </ul>
 </section>
 
@@ -464,7 +302,18 @@ p strong {
         <input type="text" id="systemID" placeholder="Enter System ID" />
         <div id="errorMsg" class="error-message"></div>
         <div id="successMsg" class="success-message hidden"></div>
-        <button onclick="validateID()">Submit</button>
+        <button onclick="validateID('political')">Submit</button>
+        <button onclick="closePrompt()">Cancel</button>
+    </div>
+</div>
+
+<div id="promptBoxEnglish" class="hidden">
+    <div class="promptContent">
+        <label for="systemIDEnglish">Enter your System ID:</label>
+        <input type="text" id="systemIDEnglish" placeholder="Enter System ID" />
+        <div id="errorMsgEnglish" class="error-message"></div>
+        <div id="successMsgEnglish" class="success-message hidden"></div>
+        <button onclick="validateID('English')">Submit</button>
         <button onclick="closePrompt()">Cancel</button>
     </div>
 </div>
@@ -474,7 +323,7 @@ p strong {
     .hidden {
         display: none;
     }
-    #promptBox {
+    #promptBox, #promptBoxEnglish {
         position: fixed;
         top: 50%;
         left: 50%;
@@ -492,7 +341,7 @@ p strong {
         flex-direction: column;
         gap: 15px;
     }
-    #systemID {
+    #systemID, #systemIDEnglish {
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -544,22 +393,29 @@ p strong {
     const db = getFirestore(app);
 
     // Open the prompt box
-    window.requestSystemID = function () {
-        document.getElementById("promptBox").classList.remove("hidden");
+    window.requestSystemID = function (subject) {
+        if (subject === 'political') {
+            document.getElementById("promptBox").classList.remove("hidden");
+        } else {
+            document.getElementById("promptBoxEnglish").classList.remove("hidden");
+        }
         document.getElementById("errorMsg").innerHTML = ""; // Clear previous error messages
+        document.getElementById("errorMsgEnglish").innerHTML = ""; // Clear previous error messages
     };
 
     // Close the prompt box
     window.closePrompt = function () {
         document.getElementById("promptBox").classList.add("hidden");
+        document.getElementById("promptBoxEnglish").classList.add("hidden");
         document.getElementById("systemID").value = ""; // Clear input
+        document.getElementById("systemIDEnglish").value = ""; // Clear input
     };
 
-    // Validate System ID
-    window.validateID = async function () {
-        const userID = document.getElementById("systemID").value.trim();
-        const errorMsg = document.getElementById("errorMsg");
-        const successMsg = document.getElementById("successMsg");
+    // Validate System ID for Political Science
+    window.validateID = async function (subject) {
+        const userID = document.getElementById(subject === 'political' ? "systemID" : "systemIDEnglish").value.trim();
+        const errorMsg = document.getElementById(subject === 'political' ? "errorMsg" : "errorMsgEnglish");
+        const successMsg = document.getElementById(subject === 'political' ? "successMsg" : "successMsgEnglish");
 
         if (!userID) {
             errorMsg.innerHTML = "System ID is required!";
@@ -579,7 +435,11 @@ p strong {
                 successMsg.innerHTML = "System ID verified successfully! Redirecting...";
                 successMsg.classList.remove("hidden");
                 setTimeout(() => {
-                    window.location.href = "Sr.html"; // Replace with your link
+                    if (subject === 'political') {
+                        window.location.href = "politicalassignment.html"; // Replace with your link
+                    } else {
+                        window.location.href = "https://youtu.be/pcVjCqujZ0o?si=VozGtMtxL7Q9M4EI"; // Replace with your link
+                    }
                 }, 3000); // 3 seconds delay
             } else {
                 // Show different error messages for invalid IDs
@@ -591,213 +451,25 @@ p strong {
                 setTimeout(() => {
                     errorMsg.innerHTML = ""; // Hide the error message after 3 seconds
                 }, 3000); // 3 seconds delay
-                document.getElementById("systemID").value = ""; // Clear input
+                document.getElementById(
+    subject === 'political' ? "systemID" : 
+    subject === 'English' ? "systemIDEnglish" : 
+    subject === 'history' ? "systemIDHistory" : 
+    subject === 'geography' ? "systemIDGeography" : 
+    "systemIDBiology" // Default to Biology
+).value = ""; // Clear the appropriate input field
             }
         } catch (error) {
             console.error("Error verifying System ID:", error);
             alert("An error occurred while verifying your System ID. Please try again later.");
         }
     };
-            </script>
-<!-- NEW SACTION START Section -->
-<!-- NEW SACTION START Section -->
-<!-- NEW SACTION START Section -->
-<!-- NEW SACTION START Section -->
-
-
-<section>
-    <h2>Film study</h2>
-    <h5>Presantacen of film studys:-</h5>
-
-    <br>
-    <ul>
-        <li>
-           <b> Q&A from film study </b>
-            <a href="#" onclick="requestSystemID()">
-
-              Q&A Based on film study</a> <b>click this link</b>
-        </li>
-
-        <li> <b>First login to generate your system ID </b>
-
-        </li>
-        <li> <b>Enter your system ID To Access Material</b>
-</li>
-    </ul>
-</section>
-
-<div id="message" class="error-message"></div>
-<div id="promptBox" class="hidden">
-    <div class="promptContent">
-        <label for="systemID">Enter your System ID:</label>
-        <input type="text" id="systemID" placeholder="Enter System ID" />
-        <div id="errorMsg" class="error-message"></div>
-        <div id="successMsg" class="success-message hidden"></div>
-        <button onclick="validateID()">Submit</button>
-        <button onclick="closePrompt()">Cancel</button>
-    </div>
-</div>
-
-<style>
-    /* Styling for the prompt box */
-    .hidden {
-        display: none;
-    }
-    #promptBox {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 320px;
-        padding: 20px;
-        background-color: #ffffff;
-        border: 1px solid #ddd;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        z-index: 1000;
-    }
-    .promptContent {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-    #systemID {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-        font-size: 16px;
-    }
-    button {
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: white;
-        cursor: pointer;
-        transition: background-color 0.3s ease-in-out;
-    }
-    button:hover {
-        background-color: #0056b3;
-    }
-    .error-message {
-        color: red;
-        font-size: 14px;
-        margin-top: 5px;
-    }
-    .success-message {
-        color: green;
-        font-size: 14px;
-        margin-top: 5px;
-    }
-</style>
-
-<script type="module">
-    // Firebase Configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyC0uWUonhrnW_UaN8LWhDEMWegsxVm2t6I",
-        authDomain: "sr-login-3c465.firebaseapp.com",
-        projectId: "sr-login-3c465",
-        storageBucket: "sr-login-3c465.appspot.com",
-        messagingSenderId: "382591869954",
-        appId: "1:382591869954:web:f590e6ad3024e40929f31b",
-        measurementId: "G-YVX5904N7H"
-    };
-
-    // Import Firebase methods
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
-    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // Open the prompt box
-    window.requestSystemID = function () {
-        document.getElementById("promptBox").classList.remove("hidden");
-        document.getElementById("errorMsg").innerHTML = ""; // Clear previous error messages
-    };
-
-    // Close the prompt box
-    window.closePrompt = function () {
-        document.getElementById("promptBox").classList.add("hidden");
-        document.getElementById("systemID").value = ""; // Clear input
-    };
-
-    // Validate System ID
-    window.validateID = async function () {
-        const userID = document.getElementById("systemID").value.trim();
-        const errorMsg = document.getElementById("errorMsg");
-        const successMsg = document.getElementById("successMsg");
-
-        if (!userID) {
-            errorMsg.innerHTML = "System ID is required!";
-            setTimeout(() => {
-                errorMsg.innerHTML = ""; // Hide the error message after 3 seconds
-            }, 3000); // 3 seconds delay
-            return;
-        }
-
-        try {
-            // Query Firebase for the entered System ID
-            const q = query(collection(db, "users"), where("systemID", "==", userID));
-            const querySnapshot = await getDocs(q);
-
-            if (!querySnapshot.empty) {
-                // Show success message and redirect after 3 seconds
-                successMsg.innerHTML = "System ID verified successfully! Redirecting...";
-                successMsg.classList.remove("hidden");
-                setTimeout(() => {
-                    window.location.href = "filmstudy.html"; // Replace with your link
-                }, 3000); // 3 seconds delay
-            } else {
-                // Show different error messages for invalid IDs
-                if (userID.length !== 10) {
-                    errorMsg.innerHTML = "Invalid System ID format. Please try again.";
-                } else {
-                    errorMsg.innerHTML = "Invalid System ID. Please try again.";
-                }
-                setTimeout(() => {
-                    errorMsg.innerHTML = ""; // Hide the error message after 3 seconds
-                }, 3000); // 3 seconds delay
-                document.getElementById("systemID").value = ""; // Clear input
-            }
-        } catch (error) {
-            console.error("Error verifying System ID:", error);
-            alert("An error occurred while verifying your System ID. Please try again later.");
-        }
-    };
-            </script>
+</script>
 
 <!-- NEW SACTION START Section -->
 <!-- NEW SACTION START Section -->
 <!-- NEW SACTION START Section -->
 <!-- NEW SACTION START Section -->
-
-
-
-
-
-<section>
-    <h2>English</h2>
-    <p>Get suggestions for further improvement:</p>
-    <ul>
-        <li>Suggestion 1: Join online study groups</li>
-        <li>Suggestion 2: Practice coding regularly</li>
-        <li>Suggestion 3: Attend workshops and seminars</li>
-    </ul>
-</section>
-
-<section>
-    <h2>E-Books</h2>
-    <p>Here are some helpful e-books:</p>
-    <ul>
-        <li>E-Book 1: How to Study Effectively</li>
-        <li>E-Book 2: Tips for Time Management</li>
-        <li>E-Book 3: Top Study Resources</li>
-    </ul>
-</section>
-
 
 
 
@@ -902,100 +574,4 @@ p strong {
     <h2>Contact Us</h2>
     <form action="https://formspree.io/f/xdkoogaj" method="POST" id="contact-form">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-
-        <input type="submit" value="Submit">
-        <p id="success-message" style="display:none; color: green;"></p>
-        <p id="error-message" style="display:none; color: red;"></p>
-    </form>
-</section>
-
-<script>
-    const form = document.getElementById('contact-form');
-    const submitButton = form.querySelector('input[type="submit"]');
-    const successMessage = document.getElementById('success-message');
-    const errorMessage = document.getElementById('error-message');
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        successMessage.style.display = 'none'; // Hide success message
-        errorMessage.style.display = 'none'; // Hide error message
-        submitButton.value = 'Sending...'; // Change button text
-
-        fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then(response => {
-            if (response.ok) {
-                successMessage.textContent = 'Thank you for your message!';
-                successMessage.style.display = 'block'; // Show success message
-                submitButton.value = 'Sent'; // Change button text to 'Sent'
-                form.reset();
-            } else {
-                errorMessage.textContent = 'There was a problem submitting your form. Please try again.';
-                errorMessage.style.display = 'block'; // Show error message
-                submitButton.value = 'Submit'; // Reset button text
-            }
-        }).catch(error => {
-            errorMessage.textContent = 'Network error. Please check your connection.';
-            errorMessage.style.display = 'block'; // Show error message
-            submitButton.value = 'Submit'; // Reset button text
-        });
-    });
-</script>
-
-
-
-
-
-<footer>
-    <p>&copy; 2024 SahilCodeLab. All rights reserved.</p>
-</footer>
-
-<script type="module">
-    // Firebase Configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyC0uWUonhrnW_UaN8LWhDEMWegsxVm2t6I",
-        authDomain: "sr-login-3c465.firebaseapp.com",
-        projectId: "sr-login-3c465",
-        storageBucket: "sr-login-3c465.appspot.com",
-        messagingSenderId: "382591869954",
-        appId: "1:382591869954:web:f590e6ad3024e40929f31b",
-        measurementId: "G-YVX5904N7H"
-    };
-
-    // Importing Firebase methods
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
-    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // Handle ID verification
-    document.getElementById('verifyIDButton').addEventListener('click', async function() {
-        const enteredID = document.getElementById('enteredID').value.trim();
-
-        // Query Firebase to check if the entered ID is valid
-        const q = query(collection(db, "users"), where("systemID", "==", enteredID));
-        const querySnapshot = await getDocs(q);
-
-        if (!querySnapshot.empty) {
-            // If the ID is found, perform some other action (e.g., redirect or display a success message)
-            window.location.href = "Sr.html"; // Replace with your actual URL
-        } else {
-            document.getElementById('message').innerHTML = 'Incorrect System ID. Please try again.';
-        }
-    });
-</script>
-    
-
+        <input typ
