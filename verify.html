@@ -568,10 +568,103 @@ p strong {
 
 
 
-</section>
 
 <section class="contact-form">
     <h2>Contact Us</h2>
     <form action="https://formspree.io/f/xdkoogaj" method="POST" id="contact-form">
         <label for="name">Name:</label>
-        <input typ
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <input type="submit" value="Submit">
+        <p id="success-message" style="display:none; color: green;"></p>
+        <p id="error-message" style="display:none; color: red;"></p>
+    </form>
+</section>
+
+<script>
+    const form = document.getElementById('contact-form');
+    const submitButton = form.querySelector('input[type="submit"]');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        successMessage.style.display = 'none'; // Hide success message
+        errorMessage.style.display = 'none'; // Hide error message
+        submitButton.value = 'Sending...'; // Change button text
+
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                successMessage.textContent = 'Thank you for your message!';
+                successMessage.style.display = 'block'; // Show success message
+                submitButton.value = 'Sent'; // Change button text to 'Sent'
+                form.reset();
+            } else {
+                errorMessage.textContent = 'There was a problem submitting your form. Please try again.';
+                errorMessage.style.display = 'block'; // Show error message
+                submitButton.value = 'Submit'; // Reset button text
+            }
+        }).catch(error => {
+            errorMessage.textContent = 'Network error. Please check your connection.';
+            errorMessage.style.display = 'block'; // Show error message
+            submitButton.value = 'Submit'; // Reset button text
+        });
+    });
+</script>
+
+
+
+
+
+<footer>
+    <p>&copy; 2024 SahilCodeLab. All rights reserved.</p>
+</footer>
+
+<script type="module">
+    // Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyC0uWUonhrnW_UaN8LWhDEMWegsxVm2t6I",
+        authDomain: "sr-login-3c465.firebaseapp.com",
+        projectId: "sr-login-3c465",
+        storageBucket: "sr-login-3c465.appspot.com",
+        messagingSenderId: "382591869954",
+        appId: "1:382591869954:web:f590e6ad3024e40929f31b",
+        measurementId: "G-YVX5904N7H"
+    };
+
+    // Importing Firebase methods
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Handle ID verification
+    document.getElementById('verifyIDButton').addEventListener('click', async function() {
+        const enteredID = document.getElementById('enteredID').value.trim();
+
+        // Query Firebase to check if the entered ID is valid
+        const q = query(collection(db, "users"), where("systemID", "==", enteredID));
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+            // If the ID is found, perform some other action (e.g., redirect or display a success message)
+            window.location.href = "Sr.html"; // Replace with your actual URL
+        } else {
+            document.getElementById('message').innerHTML = 'Incorrect System ID. Please try again.';
+        }
+    });
+</script>
