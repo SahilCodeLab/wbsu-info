@@ -497,7 +497,7 @@ p strong {
                 successMsg.innerHTML = "System ID verified successfully! Redirecting...";
                 successMsg.classList.remove("hidden");
                 setTimeout(() => {
-                    if (subject === 'political') {
+                    if (subject === 'History') {
                         window.location.href = "https://sahilcodelab.github.io/History/"; // Replace with your link
                     } else {
                         window.location.href = "https://sahilcodelab.github.io/History/"; // Replace with your link
@@ -514,9 +514,9 @@ p strong {
                     errorMsg.innerHTML = ""; // Hide the error message after 3 seconds
                 }, 3000); // 3 seconds delay
                 document.getElementById(
-    subject === 'political' ? "systemID" : 
-    subject === 'English' ? "systemIDEnglish" : 
-    subject === 'history' ? "systemIDHistory" : 
+    subject === 'History' ? "systemID" : 
+    subject === 'PoliticalScience' ? "systemIDEnglish" : 
+    subject === 'English' ? "systemIDHistory" : 
     subject === 'geography' ? "systemIDGeography" : 
     "systemIDBiology" // Default to Biology
 ).value = ""; // Clear the appropriate input field
