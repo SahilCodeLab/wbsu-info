@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sahilcodelab.github.io/wbsu-info/sitemap.xml
